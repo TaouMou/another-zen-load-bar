@@ -1,0 +1,38 @@
+[
+  {
+    "property": "mod.anotherloadbar.usecustomcolor",
+    "label": "Use a custom color instead of the Zen theme color",
+    "type": "checkbox",
+    "defaultValue": false
+  },
+  {
+    "property": "mod.anotherloadbar.color",
+    "label": "Custom color (any CSS color, e.g. #ffffff)",
+    "type": "string",
+    "defaultValue": "#ffffff"
+  },
+  {
+    "property": "mod.anotherloadbar.thickness",
+    "label": "Thickness",
+    "type": "string",
+    "defaultValue": "3px"
+  },
+  {
+    "property": "mod.anotherloadbar.hidemuteindicator",
+    "label": "Hide the mute indicator (full-width bar on muted tabs)",
+    "type": "checkbox",
+    "defaultValue": false
+  },
+  {
+    "property": "mod.anotherloadbar.mutedcolor",
+    "label": "Mute indicator color",
+    "type": "string",
+    "defaultValue": "orangered"
+  },
+  {
+    "property": "mod.anotherloadbar.keepzenpill",
+    "label": "Keep Zen's built-in loading pill as well",
+    "type": "checkbox",
+    "defaultValue": false
+  }
+]

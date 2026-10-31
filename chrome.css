@@ -1,0 +1,105 @@
+/*
+ * =================================================================
+ *  Another Zen Load Bar - CSS only
+ *  Based on "Load Bar" by Tanay-Kar (GPL-3.0)
+ *  https://github.com/Tanay-Kar/Zen-Themes/tree/main/LoadBar
+ *
+ *  Changes from the original:
+ *   - works in every toolbar layout, not only single-toolbar mode
+ *   - finishes to 100% and fades out instead of vanishing
+ *   - optionally hides Zen's built-in loading pill
+ *   - settings exposed through Sine
+ *
+ *  Checkbox settings are phrased so that "off" (also the state
+ *  before Sine has written any prefs) is the intended default.
+ * =================================================================
+ */
+
+/* ---- Settings (string prefs arrive from Sine as --mod-* variables) ---- */
+:root {
+  --loadbar-color: var(--zen-primary-color);
+  --loadbar-muted-color: var(--mod-anotherloadbar-mutedcolor, orangered);
+  --loadbar-thickness: var(--mod-anotherloadbar-thickness, 3px);
+}
+
+@media -moz-pref("mod.anotherloadbar.usecustomcolor") {
+  :root {
+    --loadbar-color: var(--mod-anotherloadbar-color, #ffffff);
+  }
+}
+
+/* The bar sits at the top edge of the active page.
+   Idle state: full width but invisible, so a finished load slides
+   to 100% and then fades out. */
+.browserSidebarContainer.deck-selected::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  max-width: 100% !important;
+  width: 100%;
+  height: var(--loadbar-thickness) !important;
+  background-color: var(--loadbar-color);
+  border-radius: 0 2px 2px 0;
+  z-index: 1 !important;
+  pointer-events: none;
+  opacity: 0;
+  transition: width 0.3s ease-out, opacity 0.3s ease 0.35s;
+}
+
+/* Stage 1: load just started. No transition, so the bar jumps
+   straight to 15% instead of shrinking from the idle 100% */
+:root:has(.tabbrowser-tab[selected][busy]) .browserSidebarContainer.deck-selected::before {
+  width: 15%;
+  opacity: 1;
+  transition: none;
+}
+
+/* Stage 2: page responded, favicon still pending */
+:root:has(.tabbrowser-tab[selected][busy][pendingicon]) .browserSidebarContainer.deck-selected::before {
+  width: 45%;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Stage 3: content arriving, favicon still pending */
+:root:has(.tabbrowser-tab[selected][busy][pendingicon][progress]) .browserSidebarContainer.deck-selected::before {
+  width: 85%;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Stage 4: content arriving, favicon loaded */
+:root:has(.tabbrowser-tab[selected][busy][progress]:not([pendingicon])) .browserSidebarContainer.deck-selected::before {
+  width: 95%;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Muted tab: full-width bar in the muted color while idle */
+@media not -moz-pref("mod.anotherloadbar.hidemuteindicator") {
+  :root:has(.tabbrowser-tab[selected][muted]:not([busy])) .browserSidebarContainer.deck-selected::before {
+    width: 100%;
+    opacity: 1;
+    border-radius: 0;
+    background-color: var(--loadbar-muted-color);
+    transition: background-color 0.2s ease;
+  }
+}
+
+/* Glance (the floating preview window): inset the bar to its width */
+.browserSidebarContainer.deck-selected:has([zen-glance-selected])::before,
+.browserSidebarContainer.deck-selected.zen-glance-overlay::before {
+  max-width: 85% !important;
+  left: calc(15% / 2) !important;
+  border-radius: 6px;
+}
+
+/* ...and hide it on the page behind the Glance window */
+.browserSidebarContainer.deck-selected.zen-glance-background::before {
+  display: none !important;
+}
+
+/* Zen's own pulsing pill indicator */
+@media not -moz-pref("mod.anotherloadbar.keepzenpill") {
+  #zen-loading-progress-bar {
+    display: none !important;
+  }
+}

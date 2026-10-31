@@ -1,0 +1,17 @@
+{
+  "id": "064f2da4-c488-4596-bace-4ed7e8d95f1c",
+  "name": "Another Zen Load Bar",
+  "description": "A thin loading bar along the top of the page that steps forward as the page loads, plus a mute indicator. Works in every toolbar layout. Based on Load Bar by Tanay-Kar.",
+  "homepage": "https://github.com/TaouMou/another-zen-load-bar",
+  "style": {
+    "chrome": "https://raw.githubusercontent.com/TaouMou/another-zen-load-bar/main/chrome.css"
+  },
+  "readme": "https://raw.githubusercontent.com/TaouMou/another-zen-load-bar/main/README.md",
+  "preferences": "https://raw.githubusercontent.com/TaouMou/another-zen-load-bar/main/preferences.json",
+  "author": "TaouMou",
+  "version": "1.0.0",
+  "tags": ["Animation"],
+  "createdAt": "2026-10-31",
+  "updatedAt": "2026-10-31",
+  "fork": ["zen"]
+}
