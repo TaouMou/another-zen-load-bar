@@ -4,7 +4,8 @@ A thin loading bar along the top edge of the page for [Zen Browser](https://zen-
 
 - Steps forward as the page loads (15% → 45% → 85% → 95%), driven by the tab's own loading state
 - Slides to 100% and fades out when the page finishes
-- Uses your Zen theme color, or a custom color
+- Uses your Zen theme color (lightened if it's too dark to see), or a custom color
+- Soft glow so it stands out on light and dark pages (optional)
 - Full-width colored bar on muted tabs (optional)
 - Fits the Glance preview window
 - Works in every toolbar layout
@@ -36,7 +37,8 @@ Without Sine, the settings below stay at their defaults. To change the color or 
 |---|---|
 | Use a custom color instead of the Zen theme color | Off |
 | Custom color | `#ffffff` |
-| Thickness | `3px` |
+| Thickness | `4px` |
+| Hide the glow around the bar | Off |
 | Hide the mute indicator | Off |
 | Mute indicator color | `orangered` |
 | Keep Zen's built-in loading pill as well | Off |

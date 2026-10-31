@@ -17,9 +17,24 @@
 
 /* ---- Settings (string prefs arrive from Sine as --mod-* variables) ---- */
 :root {
-  --loadbar-color: var(--zen-primary-color);
+  /* Zen accents are often very dark, so lighten the theme color */
+  --loadbar-color: color-mix(in srgb, var(--zen-primary-color), white 60%);
   --loadbar-muted-color: var(--mod-anotherloadbar-mutedcolor, orangered);
-  --loadbar-thickness: var(--mod-anotherloadbar-thickness, 3px);
+  --loadbar-thickness: var(--mod-anotherloadbar-thickness, 4px);
+  --loadbar-glow: 0 0 10px var(--loadbar-color), 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+/* Better: keep the accent's hue and only raise its lightness when it's dark */
+@supports (color: oklch(from red max(l, 0.5) c h)) {
+  :root {
+    --loadbar-color: oklch(from var(--zen-primary-color) max(l, 0.78) c h);
+  }
+}
+
+@media -moz-pref("mod.anotherloadbar.hideglow") {
+  :root {
+    --loadbar-glow: none;
+  }
 }
 
 @media -moz-pref("mod.anotherloadbar.usecustomcolor") {
@@ -40,6 +55,7 @@
   width: 100%;
   height: var(--loadbar-thickness) !important;
   background-color: var(--loadbar-color);
+  box-shadow: var(--loadbar-glow);
   border-radius: 0 2px 2px 0;
   z-index: 1 !important;
   pointer-events: none;

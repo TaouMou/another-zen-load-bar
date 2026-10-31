@@ -15,7 +15,13 @@
     "property": "mod.anotherloadbar.thickness",
     "label": "Thickness",
     "type": "string",
-    "defaultValue": "3px"
+    "defaultValue": "4px"
+  },
+  {
+    "property": "mod.anotherloadbar.hideglow",
+    "label": "Hide the glow around the bar",
+    "type": "checkbox",
+    "defaultValue": false
   },
   {
     "property": "mod.anotherloadbar.hidemuteindicator",
